@@ -11,10 +11,17 @@
     $cliente = new Clientes($db);
     $clienteId = intval($_GET["cliente_id"]);
     $clienteEmail = $_GET["cliente_email"];
+    $clienteSearch = $_GET["clienteSearch"];
 
     switch($_SERVER["REQUEST_METHOD"])
     {
         case 'GET':
+
+            if(!empty($clienteSearch))
+            {
+               $clienteEmail = $clienteId = $clienteSearch;
+            }
+
             if(!empty($clienteId) || !empty($clienteEmail))
                 $clientes = $cliente->getSingleCliente($clienteId, $clienteEmail);
             else
